@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool canMove = true;
 
+    public Transform visualRoot;    
 
     void Start()
     {
@@ -35,6 +36,11 @@ public class PlayerMovement : MonoBehaviour
 
         // 2. Rotate input to isometric direction
         Vector3 isometricInput = Quaternion.Euler(0, 45, 0) * input;
+        if (isometricInput.magnitude > 0.1f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(isometricInput);
+            visualRoot.rotation = Quaternion.Slerp(visualRoot.rotation, targetRotation, Time.deltaTime * 10f);
+        }
 
         // 3. Determine current speed
         bool isRunning = Input.GetKey(KeyCode.LeftShift);

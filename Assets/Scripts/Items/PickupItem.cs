@@ -9,6 +9,7 @@ public class PickupItem : MonoBehaviour, IPickup
     {
         Debug.Log($"Picked up: {itemName}");
         // Add item to inventory or similar logic
+        // TODO create logic to add to player inventory
         Destroy(gameObject);
     }
 }
